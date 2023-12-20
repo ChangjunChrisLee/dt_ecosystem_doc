@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>디지털 전환 생태계 분석 및 토픽 모델링을 통한 산업 분류 방안</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="dt_ecosystem_analysis_doc_files/libs/clipboard/clipboard.min.js"></script>
+<script src="dt_ecosystem_analysis_doc_files/libs/quarto-html/quarto.js"></script>
+<script src="dt_ecosystem_analysis_doc_files/libs/quarto-html/popper.min.js"></script>
+<script src="dt_ecosystem_analysis_doc_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="dt_ecosystem_analysis_doc_files/libs/quarto-html/anchor.min.js"></script>
+<link href="dt_ecosystem_analysis_doc_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="dt_ecosystem_analysis_doc_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="dt_ecosystem_analysis_doc_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="dt_ecosystem_analysis_doc_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="dt_ecosystem_analysis_doc_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">디지털 전환 생태계 분석 및 토픽 모델링을 통한 산업 분류 방안</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="연구-목적" class="level2">
+<h2 class="anchored" data-anchor-id="연구-목적">연구 목적</h2>
+<blockquote class="blockquote">
+<p>본 연구는 디지털 기술과 서비스 산업의 융합이라는 현대적 현상을 깊이 있게 분석하고, 미래 지향적인 산업 발전 방향을 제시하는 데 중점을 둔다. 이를 통해 학문적 통찰과 실무적 가이드라인을 제공하고자 함</p>
+</blockquote>
+</section>
+<section id="토픽-모델링을-이용한-서비스-산업-분류-및-디지털-전환-트렌드-분석" class="level2">
+<h2 class="anchored" data-anchor-id="토픽-모델링을-이용한-서비스-산업-분류-및-디지털-전환-트렌드-분석">토픽 모델링을 이용한 서비스 산업 분류 및 디지털 전환 트렌드 분석</h2>
+</section>
+<section id="토픽모델링을-활용한-dt생태계-산업-구분" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="토픽모델링을-활용한-dt생태계-산업-구분"><code>토픽모델링</code>을 활용한 DT생태계 산업 구분</h2>
+<hr>
+<ul>
+<li>데이터 내 기업 설명을 활용하여 LDA 진행</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/corp.RData"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(corp <span class="sc">%&gt;%</span> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>               <span class="fu">select</span>(기업명, 기업설명) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>               <span class="fu">head</span>(<span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 77%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">기업명</th>
+<th style="text-align: left;">기업설명</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">서울옥션</td>
+<td style="text-align: left;">미술품 경매 서비스 플랫폼 ‘서울옥션’, ’블랙랏’을 운영하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">한국산업은행</td>
+<td style="text-align: left;">한국산업은행법에 의해 설립된 특수은행</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">아산나눔재단</td>
+<td style="text-align: left;">청년창업 지원 및 교육사업, 협력사업을 전개하는 현대그룹의 재단</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">케이옥션</td>
+<td style="text-align: left;">미술품 경매 서비스 ’케이옥션’을 운영하는 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">민다</td>
+<td style="text-align: left;">한인 숙소 숙박 예약 플랫폼 ’민다’를 운영하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">대학내일</td>
+<td style="text-align: left;">트렌드 미디어 ‘캐릿’ 운영 및 광고/마케팅 솔루션을 제공하는 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">샤페론</td>
+<td style="text-align: left;">아토피 피부염 치료제를 개발하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">자연인</td>
+<td style="text-align: left;">천연화장품 브랜드 ’아이소이’를 운영하는 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">리본즈코리아</td>
+<td style="text-align: left;">명품 신제품/빈티지 제품 커머스 및 렌트 서비스 플랫폼 ’리본즈’를 운영하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">이그린글로벌</td>
+<td style="text-align: left;">마이크로튜버기술 기반 씨감자 종자를 개발하는 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">파킹클라우드</td>
+<td style="text-align: left;">클라우드 기반 스마트 주차장 관리 및 검색 서비스를 제공하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">아이헤이트플라잉버그스</td>
+<td style="text-align: left;">에듀테크 기반 중고등 온라인 영어, 수학 과외 플랫폼 ’밀당PT’를 운영하는 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">버튼테크놀로지</td>
+<td style="text-align: left;">대리운전 콜 플랫폼 ’버튼대리’를 운영하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">머스트잇</td>
+<td style="text-align: left;">온라인 명품 커머스 플랫폼 ’머스트잇’을 운영하는 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">라이칸스로프</td>
+<td style="text-align: left;">대한민국의 레저스포츠 랜턴 전문 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">선을만나다</td>
+<td style="text-align: left;">정부 중앙부처와 산하기관, 스타트업의 홍보기획과 대행 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">에이팀벤처스</td>
+<td style="text-align: left;">제조 업체 매칭 플랫폼 ’카파’를 운영하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">티켓몹</td>
+<td style="text-align: left;">공연·페스티벌 전문 소셜 큐레이션 서비스 ‘꽃가마’ 개발 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">500비디오스</td>
+<td style="text-align: left;">모바일 기반 비디오 명함 제작 플랫폼 ’500비디오스’를 운영하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">스리체어스</td>
+<td style="text-align: left;">저널 디지털 퍼블리싱 플랫폼 ’북저널리즘’을 운영하는 기업</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="토픽모델링을-활용한-dt생태계-산업-구분-1" class="level2">
+<h2 class="anchored" data-anchor-id="토픽모델링을-활용한-dt생태계-산업-구분-1"><code>토픽모델링</code>을 활용한 DT생태계 산업 구분</h2>
+<hr>
+<ul>
+<li><p>특수문자 제거, 대문자 통일, 명사 추출 등의 텍스트 전처리 과정..</p></li>
+<li><p>최적 토픽 수 정하기: <code>k = 20개</code></p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. 최적 토픽 수 정하기</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ldatuning)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/LDA_model_saved.RData"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">FindTopicsNumber_plot</span>(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>20개의 토픽으로 베타와 감마 값들을 추정한 LDA 모델 결과</p>
+<ul>
+<li><p>Beta: 토픽(산업)별 단어(키워드) 확률</p></li>
+<li><p>gamma: 문서(기업)별 토픽(산업) 확률</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="토픽모델링을-활용한-dt생태계-산업-구분-2" class="level2">
+<h2 class="anchored" data-anchor-id="토픽모델링을-활용한-dt생태계-산업-구분-2"><code>토픽모델링</code>을 활용한 DT생태계 산업 구분</h2>
+<hr>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(textclean)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/top_term_topic.RData"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>g1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(top_term_topic,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder_within</span>(term, beta, topic),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> beta,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> <span class="fu">factor</span>(topic))) <span class="sc">+</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> topic, <span class="at">scales =</span> <span class="st">"free"</span>, <span class="at">ncol =</span> <span class="dv">7</span>) <span class="sc">+</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_reordered</span>() <span class="sc">+</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">4</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">number_format</span>(<span class="at">accuracy =</span> .<span class="dv">01</span>)) <span class="sc">+</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>) </span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>g1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="4000"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="dt생태계-산업별-키워드" class="level2">
+<h2 class="anchored" data-anchor-id="dt생태계-산업별-키워드">DT생태계 산업별 <code>키워드</code></h2>
+<hr>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/count_topic_word.RData"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(count_topic_word,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(topic_name, n),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> n,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> topic_name)) <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> n) , <span class="co"># 문서 빈도 표시</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.2</span>) <span class="sc">+</span> <span class="co"># 막대 밖에 표시</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> term), <span class="co"># 주요 단어 표시</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="fl">1.03</span>, <span class="co"># 막대 안에 표시</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">col =</span> <span class="st">"white"</span>, <span class="co"># 색깔</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="co"># 두껍게</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">family =</span> <span class="st">"nanumgothic"</span>) <span class="sc">+</span> <span class="co"># 폰트</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="co"># y축-막대 간격 줄이기</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>                     <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">510</span>)) <span class="sc">+</span> <span class="co"># y축 범위</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="4000"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="dt생태계-산업별-키워드-1" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="dt생태계-산업별-키워드-1">DT생태계 산업별 <code>키워드</code></h2>
+<hr>
+<ul>
+<li>16번 주제(산업)의 세부 기업 설명 내용: Gamma 내림차순 정렬</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/corp_topic_arr.RData"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  corp_topic_arr <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(topic <span class="sc">==</span> <span class="dv">16</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(기업명, 기업설명)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 83%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">기업명</th>
+<th style="text-align: left;">기업설명</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">미디어프론트</td>
+<td style="text-align: left;">실감콘텐츠 및 미디어 솔루션을 기반으로 디지털 미디어 컨설팅 및 공간 기획을 하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">키베이직</td>
+<td style="text-align: left;">반려동물 생애주기 맞춤형 건강식품 브랜드 ’위그힐’을 운영하는 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">시프트업</td>
+<td style="text-align: left;">모바일 RPG(role playing game) 게임 ‘데스티니 차일드’와 ’니케:전쟁의 여신’ 등을 개발 및 운영하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">아이디어박스</td>
+<td style="text-align: left;">모바일 AoS 게임을 개발하는 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5민랩</td>
+<td style="text-align: left;">AI/VR 기반 모바일 게임을 개발하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">제트커머스코퍼레이션</td>
+<td style="text-align: left;">퀵커머스 마켓 플랫폼 ’패스켓’을 운영하는 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">아이지에이웍스</td>
+<td style="text-align: left;">AI/머신러닝 기반 모바일 마케팅 솔루션을 제공하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">넥셀론</td>
+<td style="text-align: left;">모바일 낚시 게임 ‘피싱앤라이프’ 등을 운영하는 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">나날이</td>
+<td style="text-align: left;">VR 게임 ‘후르츠어택 VR’ 및 모바일 게임 ‘샐리의 법칙’ 등을 운영하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">라이온하트스튜디오</td>
+<td style="text-align: left;">모바일 MMO RPG 게임 ’오딘’을 운영하는 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">엔퓨전</td>
+<td style="text-align: left;">2D 애니메이션 기반 모바일 수집형 RPG 게임을 개발하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">샤인게임즈</td>
+<td style="text-align: left;">게임개발 기술 기반의 실시간 PVP 팀 배틀 게임을 개발하는 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">하이로컬</td>
+<td style="text-align: left;">전세계 현지인과의 실시간 통화 연결 플랫폼 ’하이로컬’을 운영하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">뉴지스탁</td>
+<td style="text-align: left;">개인투자자를 위한 투자 로보어드바이저 및 알고리즘 매매를 하는 “젠포트”를 개발, 운영하는 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">액션스퀘어</td>
+<td style="text-align: left;">모바일 액션 RPG 게임 ‘블레이드’, ’삼국지 블레이드’등을 개발 및 공급하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">한국공간데이터</td>
+<td style="text-align: left;">AI 기반 공간 운영 솔루션 ‘스페이션’ 및 청소/수리 서비스 플랫폼 ‘마이소장’, ’클리니어’를 운영하는 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">노써치</td>
+<td style="text-align: left;">사용자 리뷰 기반 가전제품 비교,추천 및 판매 플랫폼 ’노써치’를 운영하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">비브스튜디오스</td>
+<td style="text-align: left;">VR/AR 기술 기반 메타버스 콘텐츠의 기획/제작 및 솔루션을 제공하는 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">플레인베이글</td>
+<td style="text-align: left;">AI 알고리즘 기반 고객맞춤형 언어 학습 플랫폼 ’스키피’와 채팅형 시뮬레이션 게임 플랫폼 ’피카’를 운영하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">넵튠</td>
+<td style="text-align: left;">모바일 게임을 개발하는 기업</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="dt생태계-산업별-키워드-2" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="dt생태계-산업별-키워드-2">DT생태계 산업별 <code>키워드</code></h2>
+<hr>
+<ul>
+<li>20번 주제(산업)의 세부 기업 설명 내용: Gamma 내림차순 정렬</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/corp_topic_arr.RData"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  corp_topic_arr <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(topic <span class="sc">==</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(기업명, 기업설명)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">기업명</th>
+<th style="text-align: left;">기업설명</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">바이포엠</td>
+<td style="text-align: left;">광고마케팅 기반 PB 상품 유통 및 음악/출판/영상 등의 콘텐츠를 제작하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">비디오빌리지</td>
+<td style="text-align: left;">뉴미디어 기반 영상 콘텐츠를 제작하는 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">투니모션</td>
+<td style="text-align: left;">웹툰 기반 애니메이션 콘텐츠를 제작하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">플레이리스트</td>
+<td style="text-align: left;">웹드라마 및 모바일 콘텐츠를 제작하는 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">캠프파이어애니웍스</td>
+<td style="text-align: left;">애니메이션 영화 및 비디오물을 제작하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">앰포</td>
+<td style="text-align: left;">영상 콘텐츠 전용 VPN ‘마릴 VPN’ 솔루션을 제공하는 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">어반플레이</td>
+<td style="text-align: left;">도시를 기획하고 도시 맞춤형 콘텐츠를 제작하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">모스테입스</td>
+<td style="text-align: left;">애니메이션, 게임, 웹툰 등을 제작하는 콘텐츠 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">쉐이커미디어</td>
+<td style="text-align: left;">템플릿 기반 상업용 영상 제작 플랫폼 ’쉐이커’를 운영하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">스튜디오쉘터</td>
+<td style="text-align: left;">3D그래픽, 애니메이션 기술을 기반 콘텐츠를 제작하는 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">유니드캐릭터</td>
+<td style="text-align: left;">유아용 애니메이션 컨텐츠 “크리켓팡”을 제작하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">엠젯패밀리</td>
+<td style="text-align: left;">웹툰/웹소설 제작 및 굿즈 커머스 플랫폼을 운영하는 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">구디스튜디오</td>
+<td style="text-align: left;">디지털 제작 시스템 기반 웹툰,웹소설 등의 콘텐츠를 제작하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">몬스터스튜디오</td>
+<td style="text-align: left;">‘브레드 이발소’ 등의 애니메이션 영상 및 굿즈를 제작하는 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">네오사피엔스</td>
+<td style="text-align: left;">인공지능 기반 음성, 영상 콘텐츠 제작 서비스 플랫폼 ’타입캐스트’를 운영하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">테이크원컴퍼니</td>
+<td style="text-align: left;">게임/음악/드라마/영화/웹툰 등의 콘텐츠를 제작하는 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">엔진비주얼웨이브</td>
+<td style="text-align: left;">시각 특수효과 및 영상 그래픽 콘텐츠를 제작하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">딥픽셀</td>
+<td style="text-align: left;">컴퓨터 비전 및 머신 러닝 기반 시각 지능 알고리즘을 연구, 개발하는 기업</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">얼반웍스</td>
+<td style="text-align: left;">방송 및 광고 제작, 연예 매니지먼트 및 뉴미디어 사업 등의 콘텐츠를 제작하는 기업</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">멋들어진</td>
+<td style="text-align: left;">MTO 패션 가상제작 및 주문/생산 관리 솔루션 플랫폼 ’플러그’를 운영하는 기업</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="산업별-제목-도출" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="산업별-제목-도출">산업별 제목 도출</h2>
+<hr>
+<ul>
+<li><p>OpenAI의 <code>chatGPT 4.0</code> 활용 (아래 프롬프트 활용, 자동화)</p></li>
+<li><p>후보군으로 제시된 산업 이름 중 가장 적합한 것을 고르고 연구자 주관으로 수정</p></li>
+</ul>
+<p><strong><em>Prompt template</em></strong></p>
+<blockquote class="blockquote">
+<p>아래 대표 기업들의 상세 설명을 대표할 수 있는 산업의 이름으로 요약하시오. - 이때 산업별 키워드 X1, X2, X3, .. ,X10 를 활용하여 산업 이름을 만드시오. - 산업 이름 후보로 5개 만드시오. - 대표 기업 30개의 상세 설명 열거..</p>
+</blockquote>
+<p><strong>최종 산업별 이름 도출</strong></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+산업 이름
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>1. 헬스케어, 식품, 화장품 커머스 및 기술 서비스 산업</p>
+<p>2. 신약 개발과 디지털 기술 활용의 면역 및 난치질환 치료 산업</p>
+<p>3. 스마트 제조 기술과 인공지능 활용의 판매 및 전기 인프라 산업</p>
+<p>4. 스마트 소프트웨어와 위치 기반 숙박 및 여행 서비스 중개 산업</p>
+<p>5. 웨어러블과 의약품 기반 브랜드 커머스 및 판매 산업</p>
+<p>6. 온라인 결제, 커머스와 자율주행 기술 산업</p>
+<p>7. 빅데이터 분석 및 보안 기반 사업 솔루션 산업</p>
+<p>8. 인공지능 및 IOT 기반 교육과 유통 콘텐츠 시스템 산업</p>
+<p>9. 패션, 뷰티 및 헬스 중심의 디지털 콘텐츠 및 정보 시스템 산업</p>
+<p>10. 글로벌 정보 및 데이터 관리를 위한 IT 및 이커머스 컨설팅 산업</p>
+<p>11. 디지털 기반 온·오프라인 커뮤니티 및 마케팅 지원 산업</p>
+<p>12. 차량관리, 로봇 기술, 진단 제품 제조 및 미디어 산업</p>
+<p>13. 메타 교육, 쇼핑 및 용품 관리, 영어 방문서비스 산업</p>
+<p>14. 온라인 공유 및 협업 중심의 비교-구매 커머스</p>
+<p>15. 디지털 이커머스, 반려동물 관리, IOT 제조 및 부동산 중개 스타트업 산업</p>
+<p>16. 모바일 게임과 VR을 활용한 맞춤형 미디어 및 공간 기획 산업</p>
+<p>17. 비대면 교육 및 예약 서비스를 중심으로 한 브랜드 제품 유통 및 소프트웨어 설계 산업</p>
+<p>18. 블록체인 기반 가상자산 관리와 통합 거래 커뮤니티 산업</p>
+<p>19. 전문 제조와 공급을 통한 친환경 테크놀로지 산업</p>
+<p>20. 다양한 매체를 통한 콘텐츠 제작 및 영상 스트리밍 산업</p>
+</div>
+</div>
+</section>
+<section id="산업별-기업" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="산업별-기업">산업별 기업</h2>
+<hr>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggwordcloud)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>corp_topic_arr <span class="sc">%&gt;%</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(기업명, gamma, topic_lab) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic_lab) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(gamma, <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">label =</span> 기업명, <span class="at">size =</span> gamma)) <span class="sc">+</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_wordcloud</span>(<span class="at">seed =</span> <span class="dv">1234</span>) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_radius</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="dv">1</span>), </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">range =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">30</span>)) <span class="sc">+</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> topic_lab, <span class="at">scales =</span> <span class="st">"free"</span>, <span class="at">ncol =</span> <span class="dv">7</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="6400"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="산업별-버즈" class="level2">
+<h2 class="anchored" data-anchor-id="산업별-버즈">산업별 버즈</h2>
+<hr>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/buzz_topic.RData"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>buzz_topic <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(topic_lab)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(buzz_vol <span class="sc">&lt;</span> <span class="dv">100000</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic_lab) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_buzz =</span> <span class="fu">mean</span>(buzz_vol)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>avg_buzz) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(topic_lab, avg_buzz),</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> avg_buzz,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> topic_lab)) <span class="sc">+</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(avg_buzz,<span class="dv">0</span>)) , <span class="co"># 문서 빈도 표시</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="co"># y축-막대 간격 줄이기</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>                     <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">900</span>)) <span class="sc">+</span> <span class="co"># y축 범위</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"평균 버즈량"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="4000"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="산업별-투자-단계-분포" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="산업별-투자-단계-분포">산업별 투자 단계 분포</h2>
+<hr>
+<ul>
+<li><p>VC 별로 투자 시점, 투자 round, 투자 분야가 다름</p></li>
+<li><p>돈이 몰릴 때 (투자가 일어날 때) 새로운 시장이 형성되고 동반 성장</p></li>
+<li><p>향후 어떤 새로운 시장이 형성될 지에 대해 예측해 보기 위해서 투자가 일어나는 시기를 보고자 함</p></li>
+<li><p>SEED (~3억) , Pre-A (5~10억) 단계의 투자는 시장을 키우고 있는 단계</p></li>
+</ul>
+</section>
+<section id="산업별-투자-단계-분포-1" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="산업별-투자-단계-분포-1">산업별 투자 단계 분포</h2>
+<hr>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/corp_topic_cat.RData"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>corp_topic_cat <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic_lab) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(vc_status) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(vc_status)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(vc_status <span class="sc">!=</span> <span class="st">"C+"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder_within</span>(topic_lab, n, vc_status), </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">fill =</span> vc_status)) <span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> vc_status, <span class="at">scales =</span> <span class="st">"free"</span>, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_reordered</span>() <span class="sc">+</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">4</span>,</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">number_format</span>(<span class="at">accuracy =</span> .<span class="dv">01</span>)) <span class="sc">+</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="6400"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="지식구조분석을-통한-산업생태계-tech-bm-융합-분석" class="level2">
+<h2 class="anchored" data-anchor-id="지식구조분석을-통한-산업생태계-tech-bm-융합-분석">지식구조분석을 통한 산업생태계 <code>Tech-BM</code> 융합 분석</h2>
+<hr>
+<section id="지식구조-knowledge-structure" class="level3">
+<h3 class="anchored" data-anchor-id="지식구조-knowledge-structure">지식구조 (knowledge Structure)</h3>
+<ul>
+<li><p>지식 구조는 다양한 경제 활동 및 <strong>지리적 위치 내에서 지식의 조직 및 분포</strong>를 나타냄</p></li>
+<li><p>경제의 다양한 부문에서 지식이 어떻게 생성, 공유 및 활용되고 공간적 요인에 의해 어떻게 영향을 받는지 이해하는 것이 포함됨</p></li>
+<li><p>근접성, 연결성 및 접근성과 같은 요소를 고려하여 지식 생산, 혁신 및 확산의 공간적 패턴을 조사</p></li>
+<li><p>지식 클러스터 또는 혁신 허브는 기술 단지 또는 연구 센터와 같이 지식 집약적 활동이 집중되는 특정 지리적 영역에서 나타남</p></li>
+<li><p>지식 확산(spillover)은 한 위치 또는 산업에서 생성된 지식이 다른 위치 또는 산업에 이익이 되도록 유출되어 집적 효과로 이어질 때 발생</p></li>
+<li><p>지식의 지리적 위치는 연구 개발(R&amp;D) 투자, 교육 기관, 숙련된 노동력의 가용성 및 인프라와 같은 요인의 영향을 받는다</p></li>
+<li><p>인적 자본, 사회적 네트워크 및 기관을 포함한 지역 및 지역 지식 자산은 지식 기반 산업을 유치하고 유지하는 데 중요한 역할을 함</p></li>
+<li><p>지식의 공간적 구성은 지식 집중도가 높은 지역이 지식 집약도가 낮은 지역에 비해 더 큰 경제 발전과 혁신을 경험하는 경향이 있기 때문에 지역적 격차에도 영향을 미침</p></li>
+</ul>
+</section>
+</section>
+<section id="지식구조분석을-통한-산업생태계-tech-bm-융합-분석-1" class="level2">
+<h2 class="anchored" data-anchor-id="지식구조분석을-통한-산업생태계-tech-bm-융합-분석-1">지식구조분석을 통한 산업생태계 <code>Tech-BM</code> 융합 분석</h2>
+<hr>
+<blockquote class="blockquote">
+<p>지식 구조 = 태그 구조</p>
+<p>태그 컴포넌트: Business Model, Categories, Technologies</p>
+</blockquote>
+<p><br></p>
+<section id="사업-모델-business-tag" class="level3">
+<h3 class="anchored" data-anchor-id="사업-모델-business-tag">사업 모델: Business Tag</h3>
+<blockquote class="blockquote">
+<p>TAG: 사업, 제품, 서비스, 시장 키워드 등</p>
+</blockquote>
+<p><br></p>
+</section>
+<section id="기술-tech-tag" class="level3">
+<h3 class="anchored" data-anchor-id="기술-tech-tag">기술: Tech Tag</h3>
+<blockquote class="blockquote">
+<p>TAG: 기술, 전문 영역 키워드 등</p>
+</blockquote>
+<p><br></p>
+</section>
+</section>
+<section id="산업별-태그-구조-분석" class="level2">
+<h2 class="anchored" data-anchor-id="산업별-태그-구조-분석">산업별 태그 구조 분석</h2>
+<hr>
+<blockquote class="blockquote">
+<p>해당 산업에 속한 기업들의 태그 포트폴리오</p>
+</blockquote>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(treemapify)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/tag_df.RData"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>corp_topic_arr <span class="sc">%&gt;%</span> </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(topic, topic_lab) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(topic)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  unique <span class="sc">%&gt;%</span> </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(topic) <span class="ot">-&gt;</span> topic_table</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> corp_topic_arr <span class="sc">%&gt;%</span> </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(tag_df) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(topic, <span class="fu">contains</span>(<span class="st">"tag"</span>)) </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>tag_by_topic <span class="ot">&lt;-</span> <span class="cf">function</span>(topic_input){</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span> </span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(topic <span class="sc">==</span> topic_input) <span class="sc">%&gt;%</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>topic) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    as.matrix <span class="sc">%&gt;%</span> </span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    table <span class="sc">%&gt;%</span> </span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    as.data.frame <span class="sc">%&gt;%</span> </span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(Freq)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    .[<span class="sc">-</span><span class="dv">1</span>,] <span class="sc">%&gt;%</span> </span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">setNames</span>(<span class="fu">c</span>(<span class="st">"Tag"</span>, <span class="st">"Freq"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">50</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">area =</span> Freq, <span class="at">fill =</span> Freq, <span class="at">label=</span>Tag)) <span class="sc">+</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_treemap</span>()<span class="sc">+</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_treemap_text</span>(<span class="at">colour =</span> <span class="st">"white"</span>,</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>                      <span class="at">place =</span> <span class="st">"centre"</span>,</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>                      <span class="at">size =</span> <span class="dv">15</span>,</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>                      <span class="at">grow =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="fu">paste</span>(topic_table<span class="sc">$</span>topic_lab[topic_input]))</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tag_by_topic</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="산업별-태그-구조-분석-1" class="level2">
+<h2 class="anchored" data-anchor-id="산업별-태그-구조-분석-1">산업별 태그 구조 분석</h2>
+<hr>
+<p>1. 헬스케어, 식품, 화장품 커머스 및 기술 서비스 산업</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>2. 신약 개발과 디지털 기술 활용의 면역 및 난치질환 치료 산업</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>3. 스마트 제조 기술과 인공지능 활용의 판매 및 전기 인프라 산업</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>4. 스마트 소프트웨어와 위치 기반 숙박 및 여행 서비스 중개 산업</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>5. 웨어러블과 의약품 기반 브랜드 커머스 및 판매 산업</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>6. 온라인 결제, 커머스와 자율주행 기술 산업</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>7. 빅데이터 분석 및 보안 기반 사업 솔루션 산업</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>8. 인공지능 및 IOT 기반 교육과 유통 콘텐츠 시스템 산업</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>9. 패션, 뷰티 및 헬스 중심의 디지털 콘텐츠 및 정보 시스템 산업</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>10. 글로벌 정보 및 데이터 관리를 위한 IT 및 이커머스 컨설팅 산업</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>11. 디지털 기반 온·오프라인 커뮤니티 및 마케팅 지원 산업</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>12. 차량관리, 로봇 기술, 진단 제품 제조 및 미디어 산업</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>13. 메타 교육, 쇼핑 및 용품 관리, 영어 방문서비스 산업</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>14. 온라인 공유 및 협업 중심의 비교-구매 커머스</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>15. 디지털 이커머스, 반려동물 관리, IOT 제조 및 부동산 중개 스타트업 산업</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>16. 모바일 게임과 VR을 활용한 맞춤형 미디어 및 공간 기획 산업</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>17. 비대면 교육 및 예약 서비스를 중심으로 한 브랜드 제품 유통 및 소프트웨어 설계 산업</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>18. 블록체인 기반 가상자산 관리와 통합 거래 커뮤니티 산업</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>19. 전문 제조와 공급을 통한 친환경 테크놀로지 산업</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>20. 다양한 매체를 통한 콘텐츠 제작 및 영상 스트리밍 산업</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="지식-구조의-edge-영역-biz-tech-space" class="level2">
+<h2 class="anchored" data-anchor-id="지식-구조의-edge-영역-biz-tech-space">지식 구조의 Edge 영역: <code>Biz-Tech</code> space</h2>
+<hr>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/total_net.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="지식-구조의-edge-영역-biz-tech-space-1" class="level2">
+<h2 class="anchored" data-anchor-id="지식-구조의-edge-영역-biz-tech-space-1">지식 구조의 Edge 영역: <code>Biz-Tech</code> space</h2>
+<hr>
+<iframe src="net_viz/total_tag_network.html" frameborder="0" width="160%" height="1000" scrolling="no" allowfullscreen="">
+</iframe>
+</section>
+<section id="산업별-biz-tech-space" class="level2">
+<h2 class="anchored" data-anchor-id="산업별-biz-tech-space">산업별 <code>Biz-Tech</code> space</h2>
+<hr>
+<p>1. 헬스케어, 식품, 화장품 커머스 및 기술 서비스 산업</p>
+<iframe src="net_viz/topic_1_tag_network.html" frameborder="0" width="160%" height="1000" scrolling="no" allowfullscreen="">
+</iframe>
+<p>2. 신약 개발과 디지털 기술 활용의 면역 및 난치질환 치료 산업</p>
+<iframe src="net_viz/topic_2_tag_network.html" frameborder="0" width="160%" height="1000" scrolling="no" allowfullscreen="">
+</iframe>
+<p>3. 스마트 제조 기술과 인공지능 활용의 판매 및 전기 인프라 산업</p>
+<iframe src="net_viz/topic_3_tag_network.html" frameborder="0" width="160%" height="1000" scrolling="no" allowfullscreen="">
+</iframe>
+<p>4. 스마트 소프트웨어와 위치 기반 숙박 및 여행 서비스 중개 산업</p>
+<iframe src="net_viz/topic_4_tag_network.html" frameborder="0" width="160%" height="1000" scrolling="no" allowfullscreen="">
+</iframe>
+<p>5. 웨어러블과 의약품 기반 브랜드 커머스 및 판매 산업</p>
+<iframe src="net_viz/topic_5_tag_network.html" frameborder="0" width="160%" height="1000" scrolling="no" allowfullscreen="">
+</iframe>
+<p>6. 온라인 결제, 커머스와 자율주행 기술 산업</p>
+<iframe src="net_viz/topic_6_tag_network.html" frameborder="0" width="160%" height="1000" scrolling="no" allowfullscreen="">
+</iframe>
+<p>7. 빅데이터 분석 및 보안 기반 사업 솔루션 산업</p>
+<iframe src="net_viz/topic_7_tag_network.html" frameborder="0" width="160%" height="1000" scrolling="no" allowfullscreen="">
+</iframe>
+<p>8. 인공지능 및 IOT 기반 교육과 유통 콘텐츠 시스템 산업</p>
+<iframe src="net_viz/topic_8_tag_network.html" frameborder="0" width="160%" height="1000" scrolling="no" allowfullscreen="">
+</iframe>
+<p>9. 패션, 뷰티 및 헬스 중심의 디지털 콘텐츠 및 정보 시스템 산업</p>
+<iframe src="net_viz/topic_9_tag_network.html" frameborder="0" width="160%" height="1000" scrolling="no" allowfullscreen="">
+</iframe>
+<p>10. 글로벌 정보 및 데이터 관리를 위한 IT 및 이커머스 컨설팅 산업</p>
+<iframe src="net_viz/topic_10_tag_network.html" frameborder="0" width="160%" height="1000" scrolling="no" allowfullscreen="">
+</iframe>
+<p>11. 디지털 기반 온·오프라인 커뮤니티 및 마케팅 지원 산업</p>
+<iframe src="net_viz/topic_11_tag_network.html" frameborder="0" width="160%" height="1000" scrolling="no" allowfullscreen="">
+</iframe>
+<p>12. 차량관리, 로봇 기술, 진단 제품 제조 및 미디어 산업</p>
+<iframe src="net_viz/topic_12_tag_network.html" frameborder="0" width="160%" height="1000" scrolling="no" allowfullscreen="">
+</iframe>
+<p>13. 메타 교육, 쇼핑 및 용품 관리, 영어 방문서비스 산업</p>
+<iframe src="net_viz/topic_13_tag_network.html" frameborder="0" width="160%" height="1000" scrolling="no" allowfullscreen="">
+</iframe>
+<p>14. 온라인 공유 및 협업 중심의 비교-구매 커머스</p>
+<iframe src="net_viz/topic_14_tag_network.html" frameborder="0" width="160%" height="1000" scrolling="no" allowfullscreen="">
+</iframe>
+<p>15. 디지털 이커머스, 반려동물 관리, IOT 제조 및 부동산 중개 스타트업 산업</p>
+<iframe src="net_viz/topic_15_tag_network.html" frameborder="0" width="160%" height="1000" scrolling="no" allowfullscreen="">
+</iframe>
+<p>16. 모바일 게임과 VR을 활용한 맞춤형 미디어 및 공간 기획 산업</p>
+<iframe src="net_viz/topic_16_tag_network.html" frameborder="0" width="160%" height="1000" scrolling="no" allowfullscreen="">
+</iframe>
+<p>17. 비대면 교육 및 예약 서비스를 중심으로 한 브랜드 제품 유통 및 소프트웨어 설계 산업</p>
+<iframe src="net_viz/topic_17_tag_network.html" frameborder="0" width="160%" height="1000" scrolling="no" allowfullscreen="">
+</iframe>
+<p>18. 블록체인 기반 가상자산 관리와 통합 거래 커뮤니티 산업</p>
+<iframe src="net_viz/topic_18_tag_network.html" frameborder="0" width="160%" height="1000" scrolling="no" allowfullscreen="">
+</iframe>
+<p>19. 전문 제조와 공급을 통한 친환경 테크놀로지 산업</p>
+<iframe src="net_viz/topic_19_tag_network.html" frameborder="0" width="160%" height="1000" scrolling="no" allowfullscreen="">
+</iframe>
+<p>20. 다양한 매체를 통한 콘텐츠 제작 및 영상 스트리밍 산업</p>
+<iframe src="net_viz/topic_20_tag_network.html" frameborder="0" width="160%" height="1000" scrolling="no" allowfullscreen="">
+</iframe>
+</section>
+<section id="biz-tech-space-에서-연결-가중연결-매개-위세-근접-중심성" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="biz-tech-space-에서-연결-가중연결-매개-위세-근접-중심성"><code>Biz-Tech</code> space 에서 연결, 가중연결, 매개, 위세, 근접 중심성</h2>
+<hr>
+<ul>
+<li><p><strong>연결 (Degree)</strong>: 그래프에서 한 노드가 직접적으로 연결된 다른 노드의 수: 그래프에서 해당 노드의 중요성을 간접적으로 나타낼 수 있음</p></li>
+<li><p><strong>가중연결 (Weighted Degree)</strong>: 가중 그래프에서 노드의 가중연결은 연결된 간선의 가중치의 합을 나타냄: 간선의 ‘강도’ 또는 ’중요성’을 고려한 노드의 연결 정도</p></li>
+<li><p><strong>매개 중심성 (Betweenness Centrality)</strong>: 그래프 내의 모든 노드 쌍 간의 최단 경로에 얼마나 자주 등장하는지를 나타냄: 높은 매개 중심성을 가진 노드는 정보의 흐름에 있어 ‘다리’ 역할</p></li>
+<li><p><strong>위세 중심성 (Eigenvector Centrality)</strong>: 노드의 위세 중심성은 해당 노드에 직접적으로 연결된 다른 노드들의 중요성을 함께 고려한 것: 중요한 노드들과 많이 연결된 노드가 더 높은 위세 중심성을 가짐</p></li>
+<li><p><strong>근접 중심성 (Closeness Centrality)</strong>: 노드의 근접 중심성은 해당 노드가 그래프 내의 다른 모든 노드에 얼마나 ‘가깝게’ 위치해 있는지를 나타냄: 여기서 ’가깝다’는 것은 노드 간의 경로 길이를 의미하며, 즉 노드 간의 거리가 짧을수록 높은 근접 중심성을 가집니다.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Centrality</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>get_centralities<span class="ot">&lt;-</span><span class="cf">function</span>(Graph.object){</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  Net<span class="ot">&lt;-</span>Graph.object</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  output<span class="ot">&lt;-</span><span class="fu">data.frame</span>(</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Deg=</span><span class="fu">degree</span>(Net),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">w.Deg=</span><span class="fu">strength</span>(Net),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">Btw=</span><span class="fu">betweenness</span>(Net, <span class="at">normalized =</span> T),</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Eig=</span><span class="fu">eigen_centrality</span>(Net)<span class="sc">$</span>vector,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">Close=</span><span class="fu">closeness</span>(Net)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setDT</span>(output, <span class="at">keep.rownames =</span> <span class="cn">TRUE</span>)[]</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(output)[<span class="dv">1</span>]<span class="ot">&lt;-</span><span class="st">"Id"</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>data_to_adj_mat <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span> </span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    reshape2<span class="sc">::</span><span class="fu">melt</span>(<span class="at">id=</span><span class="st">"corp_id"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(corp_id) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(value)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(value<span class="sc">!=</span><span class="st">""</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    reshape2<span class="sc">::</span><span class="fu">dcast</span>(corp_id <span class="sc">~</span> value) <span class="ot">-&gt;</span> df_wide</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>  temp<span class="ot">&lt;-</span>df_wide[<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>)]</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>  temp[<span class="fu">is.na</span>(temp)]<span class="ot">&lt;-</span><span class="dv">0</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>  temp[temp<span class="sc">!=</span><span class="dv">0</span>]<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>  temp.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(temp)</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>  temp.mat <span class="ot">&lt;-</span> <span class="fu">apply</span>(temp.mat, <span class="dv">2</span>, as.numeric)</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>  adj.mat <span class="ot">&lt;-</span> <span class="fu">t</span>(temp.mat) <span class="sc">%*%</span> temp.mat</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(adj.mat)</span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>tag_df <span class="sc">%&gt;%</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">corp_id=</span>CORP_ID) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  data_to_adj_mat <span class="sc">%&gt;%</span> </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">graph_from_adjacency_matrix</span>(.,<span class="at">mode =</span> <span class="st">"undirected"</span>, </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>                                <span class="at">weighted=</span>T, </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>                                <span class="at">diag =</span> F) <span class="ot">-&gt;</span> g</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="fu">vertex_attr</span>(g)<span class="sc">$</span>label<span class="ot">&lt;-</span><span class="fu">vertex_attr</span>(g)<span class="sc">$</span>name</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>g <span class="sc">%&gt;%</span> get_centralities <span class="ot">-&gt;</span> tag_centrality</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>tag_centrality</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Id Deg w.Deg          Btw         Eig       Close
+  1:    1인가구  34    85 0.0006103511 0.003610531 0.001142857
+  2:   3D그래픽 152  1435 0.0022541048 0.046144039 0.001225490
+  3:   3D프린팅  81   397 0.0018932947 0.015416471 0.001207729
+  4:        3PL  40   125 0.0008548040 0.004469786 0.001172333
+  5:         5G  76   421 0.0009656426 0.014534478 0.001131222
+ ---                                                          
+416:   화상회의  60   203 0.0004986936 0.005370843 0.001164144
+417: 화장품정보  69   320 0.0009651095 0.010240653 0.001190476
+418:       화학  88   689 0.0021631283 0.027356933 0.001182033
+419:       환전  34   152 0.0003481404 0.005784366 0.001071811
+420:       회계  77   330 0.0019287885 0.010962206 0.001156069</code></pre>
+</div>
+</div>
+</section>
+<section id="디지털-전환-기술-공간에서-태그의-포지션" class="level2">
+<h2 class="anchored" data-anchor-id="디지털-전환-기술-공간에서-태그의-포지션">디지털 전환 기술 공간에서 태그의 포지션</h2>
+<hr>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/deg_btw.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="디지털-전환-기술-공간에서-태그의-클러스터링" class="level2">
+<h2 class="anchored" data-anchor-id="디지털-전환-기술-공간에서-태그의-클러스터링">디지털 전환 기술 공간에서 태그의 클러스터링</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cluster)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(FactoMineR)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardize the data</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>data_std <span class="ot">&lt;-</span> <span class="fu">scale</span>(tag_centrality[, <span class="sc">-</span><span class="dv">1</span>])  <span class="co"># Exclude the Id column for PCA</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform PCA</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>pca_res <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(data_std, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Determine the number of principal components to keep</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(pca_res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the scores of the first few principal components for clustering</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Here we assume the first two principal components are used</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>pca_scores <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(pca_res<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Determine the optimal number of clusters</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)  <span class="co"># for reproducibility</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_nbclust</span>(pca_scores, kmeans, <span class="at">method =</span> <span class="st">"wss"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-34-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming the optimal number of clusters is found to be 4 (for example)</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>km_res <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(pca_scores, <span class="at">centers =</span> <span class="dv">4</span>, <span class="at">nstart =</span> <span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Append the cluster assignment to your original data</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>tag_centrality<span class="sc">$</span>cluster <span class="ot">&lt;-</span> km_res<span class="sc">$</span>cluster</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the clusters</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pca_scores, <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">color =</span> <span class="fu">as.factor</span>(km_res<span class="sc">$</span>cluster))) <span class="sc">+</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Cluster"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the difference in variables among clusters using the original data</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> <span class="fu">gather</span>(tag_centrality, </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">key =</span> <span class="st">"variables"</span>, </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">value =</span> <span class="st">"value"</span>, <span class="sc">-</span>Id, <span class="sc">-</span>cluster)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_long, </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.factor</span>(cluster), </span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> value, </span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> <span class="fu">as.factor</span>(cluster))) <span class="sc">+</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>variables, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Cluster"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-35-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<section id="section" class="level3">
+<h3 class="anchored" data-anchor-id="section"></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Library</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fmsb)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'data' is your existing data frame and it already has a 'cluster' column from the k-means result</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># We need to normalize the data first</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>data_normalized <span class="ot">&lt;-</span> tag_centrality <span class="sc">%&gt;%</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Id, <span class="sc">-</span>cluster) <span class="sc">%&gt;%</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_all</span>(<span class="cf">function</span>(x) (x <span class="sc">-</span> <span class="fu">min</span>(x)) <span class="sc">/</span> (<span class="fu">max</span>(x) <span class="sc">-</span> <span class="fu">min</span>(x)))</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co"># We will now calculate the average of each variable for each cluster to plot on the radar chart</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>data_normalized<span class="sc">$</span>cluster <span class="ot">&lt;-</span> tag_centrality<span class="sc">$</span>cluster  <span class="co"># Add the cluster assignment to the normalized data</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>data_normalized</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Deg       w.Deg        Btw         Eig     Close cluster
+  1: 0.06218905 0.002689885 0.02532668 0.003393528 0.5526800       3
+  2: 0.35572139 0.050470730 0.09571873 0.045936299 0.7414317       4
+  3: 0.17910448 0.013732569 0.08026741 0.015202039 0.7008624       4
+  4: 0.07711443 0.004105613 0.03579513 0.004252969 0.6200091       4
+  5: 0.16666667 0.014582006 0.04054168 0.014319853 0.5261022       3
+ ---                                                                
+416: 0.12686567 0.006866284 0.02054507 0.005154222 0.6013046       4
+417: 0.14925373 0.011007291 0.04051885 0.010025093 0.6614522       4
+418: 0.19651741 0.024067389 0.09182276 0.027145101 0.6421663       4
+419: 0.06218905 0.005061230 0.01409778 0.005567836 0.3903962       3
+420: 0.16915423 0.011361223 0.08178740 0.010746804 0.5828596       4</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the mean for each cluster</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>cluster_averages <span class="ot">&lt;-</span> data_normalized <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cluster) <span class="sc">%&gt;%</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_all</span>(mean)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>cluster_averages</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 6
+  cluster    Deg   w.Deg    Btw     Eig Close
+    &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+1       1 0.555  0.115   0.383  0.118   0.818
+2       2 0.947  0.606   0.110  0.645   0.362
+3       3 0.0774 0.00514 0.0262 0.00570 0.413
+4       4 0.207  0.0203  0.0853 0.0211  0.688</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>cluster_averages <span class="ot">&lt;-</span> cluster_averages <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>cluster) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rbind</span>(<span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">5</span>) , <span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">5</span>) , .)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>cluster_averages</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+     Deg   w.Deg    Btw     Eig Close
+   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+1 1      1       1      1       1    
+2 0      0       0      0       0    
+3 0.555  0.115   0.383  0.118   0.818
+4 0.947  0.606   0.110  0.645   0.362
+5 0.0774 0.00514 0.0262 0.00570 0.413
+6 0.207  0.0203  0.0853 0.0211  0.688</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(cluster_averages) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="st">"C1"</span>,<span class="st">"C2"</span>,<span class="st">"C3"</span>,<span class="st">"C4"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Setting row names on a tibble is deprecated.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>cluster_colors <span class="ot">&lt;-</span> <span class="fu">brewer.pal</span>(<span class="dv">4</span>, <span class="st">"Set1"</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># plot with default options:</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">radarchart</span>(cluster_averages, </span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">pcol =</span> cluster_colors, </span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">plty =</span> <span class="dv">1</span>, </span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">lwd =</span> <span class="dv">2</span>, </span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">cglcol =</span> <span class="st">"grey"</span>, </span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">cglty =</span> <span class="dv">1</span>)</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend to distinguish the clusters</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="fl">0.8</span>, <span class="at">y =</span> <span class="fl">1.2</span>, </span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">rownames</span>(cluster_averages)[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)], </span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">pch =</span> <span class="dv">20</span>, <span class="at">col =</span> cluster_colors, </span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">text.col =</span> <span class="st">"black"</span>, <span class="at">cex =</span> <span class="fl">0.7</span>, <span class="at">pt.cex =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="dt_ecosystem_analysis_doc_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
